@@ -55,7 +55,7 @@ module.exports = {
 					app.service('/api/' + resources).on(action, dispatchAction);
 					return function() {
 						app.service('/api/' + resources).off(action, dispatchAction);
-					}.bind(this);
+					};
 				}.bind(this))
 				.union(this.cleanups)
 				.value();
