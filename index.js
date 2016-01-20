@@ -1,1 +1,1 @@
-console.log('something');
+module.exports.resourcesReducer = require('./reducer');

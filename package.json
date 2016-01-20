@@ -12,5 +12,10 @@
   "bugs": {
     "url": "https://github.com/saiichihashimoto/feathers-react-redux/issues"
   },
-  "homepage": "https://github.com/saiichihashimoto/feathers-react-redux#readme"
+  "homepage": "https://github.com/saiichihashimoto/feathers-react-redux#readme",
+  "dependencies": {
+    "pluralize": "^1.2.1",
+    "redux": "^3.0.5",
+    "underscore": "^1.8.3"
+  }
 }
