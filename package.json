@@ -1,0 +1,19 @@
+{
+  "name": "feathers-react-redux",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saiichihashimoto/feathers-react-redux.git"
+  },
+  "author": "saiichihashimoto",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/saiichihashimoto/feathers-react-redux/issues"
+  },
+  "homepage": "https://github.com/saiichihashimoto/feathers-react-redux#readme"
+}
