@@ -77,7 +77,7 @@ var resourcesReducer = function(resource) {
 				}
 				return state || {};
 			default:
-				if (!_.result(action.payload, 'id')) {
+				if (_.chain(action.payload).result('id').isUndefined().value()) {
 					return state || {};
 				}
 				state = _.clone(state);
