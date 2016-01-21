@@ -59,6 +59,7 @@ module.exports = function(app, resource) {
 		};
 	};
 
+	actions['patched' + Resource] = updatedResource;
 	actions['patch' + Resource]   = function(id, data, params) {
 		return function(dispatch) {
 			resolveApp();
