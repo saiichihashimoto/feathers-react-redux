@@ -56,7 +56,7 @@ var resourcesReducer = function(resource) {
 	var RESOURCE  = resource.toUpperCase();
 	var RESOURCES = pluralize(resource).toUpperCase();
 
-	var singleItemReducer = resourceReducer(resource, {});
+	var singleItemReducer = resourceReducer(resource);
 
 	return function(state, action) {
 		switch (action.type) {
