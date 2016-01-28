@@ -38,7 +38,7 @@ module.exports = function(app, resource) {
 	};
 
 	actions['created' + Resource] = createdResource;
-	actions['create' + Resource]  = function(data, params) {
+	actions['create' + Resource] = function(data, params) {
 		return function(dispatch) {
 			resolveApp();
 			dispatch(creatingResource());
@@ -49,7 +49,7 @@ module.exports = function(app, resource) {
 	};
 
 	actions['updated' + Resource] = updatedResource;
-	actions['update' + Resource]  = function(id, data, params) {
+	actions['update' + Resource] = function(id, data, params) {
 		return function(dispatch) {
 			resolveApp();
 			dispatch(updatingResource({ id: id }));
@@ -60,7 +60,7 @@ module.exports = function(app, resource) {
 	};
 
 	actions['patched' + Resource] = updatedResource;
-	actions['patch' + Resource]   = function(id, data, params) {
+	actions['patch' + Resource] = function(id, data, params) {
 		return function(dispatch) {
 			resolveApp();
 			dispatch(updatingResource({ id: id }));
@@ -71,7 +71,7 @@ module.exports = function(app, resource) {
 	};
 
 	actions['removed' + Resource] = removedResource;
-	actions['remove' + Resource]  = function(id, params) {
+	actions['remove' + Resource] = function(id, params) {
 		return function(dispatch) {
 			resolveApp();
 			dispatch(removingResource({ id: id }));
