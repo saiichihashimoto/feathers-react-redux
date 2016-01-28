@@ -23,7 +23,6 @@
     "test"
   ],
   "dependencies": {
-    "async": "^1.5.2",
     "pluralize": "^1.2.1",
     "react-dom": "^0.14.6",
     "redux": "^3.0.5",
