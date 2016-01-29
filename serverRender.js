@@ -1,4 +1,5 @@
 var _        = require('underscore');
+var debug    = require('debug')('feathers-react-redux:serverRender');
 var ReactDOM = require('react-dom/server');
 
 module.exports = function serverRender(element, store, actions, done_server_actions) {
@@ -16,6 +17,7 @@ module.exports = function serverRender(element, store, actions, done_server_acti
 	}
 
 	return Promise.all(remaining_actions.map(function(action) {
+		debug('execute server action', action.type);
 		return store.dispatch(actions[action.type](actions.params));
 	}))
 	.then(function() {

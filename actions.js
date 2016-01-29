@@ -1,5 +1,6 @@
 var _            = require('underscore');
 var createAction = require('redux-actions').createAction;
+var debug        = require('debug')('feathers-react-redux:actions');
 var pluralize    = require('pluralize');
 
 module.exports = function(app, resource) {
@@ -30,8 +31,10 @@ module.exports = function(app, resource) {
 	actions['load' + Resources] = function(params) {
 		return function(dispatch) {
 			resolveApp();
+			debug('loading ' + resources, params);
 			dispatch(loadingResources());
 			return app.service('/api/' + resources).find(params, function(err, objects) {
+				debug('loaded ' + resources, err, objects);
 				dispatch(loadedResources(err ? new Error(err.message) : objects));
 			});
 		};
@@ -41,8 +44,10 @@ module.exports = function(app, resource) {
 	actions['create' + Resource] = function(data, params) {
 		return function(dispatch) {
 			resolveApp();
+			debug('creating ' + resource, data, params);
 			dispatch(creatingResource());
 			return app.service('/api/' + resources).create(data, params, function(err, object) {
+				debug('created ' + resources, err, object);
 				dispatch(createdResource(err ? new Error(err.message) : object));
 			});
 		};
@@ -52,8 +57,10 @@ module.exports = function(app, resource) {
 	actions['update' + Resource] = function(id, data, params) {
 		return function(dispatch) {
 			resolveApp();
+			debug('updating ' + resource, id, data, params);
 			dispatch(updatingResource({ id: id }));
 			return app.service('/api/' + resources).update(id, data, params, function(err, object) {
+				debug('updated ' + resources, err, object);
 				dispatch(updatedResource(err ? _.extend(new Error(err.message), { id: id }) : object));
 			});
 		};
@@ -63,8 +70,10 @@ module.exports = function(app, resource) {
 	actions['patch' + Resource] = function(id, data, params) {
 		return function(dispatch) {
 			resolveApp();
+			debug('updating ' + resource, id, data, params);
 			dispatch(updatingResource({ id: id }));
 			return app.service('/api/' + resources).patch(id, data, params, function(err, object) {
+				debug('updated ' + resources, err, object);
 				dispatch(updatedResource(err ? _.extend(new Error(err.message), { id: id }) : object));
 			});
 		};
@@ -74,8 +83,10 @@ module.exports = function(app, resource) {
 	actions['remove' + Resource] = function(id, params) {
 		return function(dispatch) {
 			resolveApp();
+			debug('removing ' + resource, id, params);
 			dispatch(removingResource({ id: id }));
 			return app.service('/api/' + resources).remove(id, params, function(err, object) {
+				debug('removed ' + resources, err, object);
 				dispatch(removedResource(err ? _.extend(new Error(err.message), { id: id }) : object));
 			});
 		};
