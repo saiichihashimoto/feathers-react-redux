@@ -17,7 +17,7 @@ module.exports = function serverRender(element, store, actions, done_server_acti
 	}
 
 	return Promise.all(remaining_actions.map(function(action) {
-		debug('execute server action', action.type);
+		debug('execute server action ' + action.type, action.params);
 		return store.dispatch(actions[action.type](actions.params));
 	}))
 	.then(function() {

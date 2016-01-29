@@ -29,7 +29,6 @@ module.exports = {
 			var resources = pluralize(resource);
 			var Resources = resources.charAt(0).toUpperCase() + resources.slice(1);
 
-			debug('server load for ' + resources);
 			this.props.dispatch({
 				type:    'SERVER_ACTION',
 				payload: {
