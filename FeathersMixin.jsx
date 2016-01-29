@@ -1,4 +1,5 @@
 var _         = require('underscore');
+var debug     = require('debug')('feathers-react-redux:FeathersMixin');
 var pluralize = require('pluralize');
 
 var DEFAULT_OPTIONS = { server_load: true, client_load: false, realtime: false };
@@ -42,6 +43,7 @@ module.exports = {
 			var resources = pluralize(resource);
 			var Resources = resources.charAt(0).toUpperCase() + resources.slice(1);
 
+			debug('client load for ' + resources);
 			this.props.dispatch(actions['load' + Resources]());
 		}.bind(this));
 
@@ -51,9 +53,14 @@ module.exports = {
 
 			this.cleanups = _.chain(['created', 'updated', 'patched', 'removed'])
 				.map(function(action) {
-					var dispatchAction = _.compose(this.props.dispatch, actions[action + Resource]);
+					debug('listening for ' + action + ' events for ' + resources);
+					var dispatchAction = function(object) {
+						debug(action + ' ' + resource, object);
+						this.props.dispatch(actions[action + Resource](object));
+					}.bind(this);
 					app.service('/api/' + resources).on(action, dispatchAction);
 					return function() {
+						debug('stop listening for ' + action + ' events for ' + resources);
 						app.service('/api/' + resources).off(action, dispatchAction);
 					};
 				}.bind(this))

@@ -1,10 +1,13 @@
 var _        = require('underscore');
+var debug    = require('debug')('feathers-react-redux:serverRender');
+var Helmet   = require('react-helmet');
 var ReactDOM = require('react-dom/server');
 
 module.exports = function serverRender(element, store, actions, done_server_actions) {
 	done_server_actions = done_server_actions || [];
 
 	var markup            = ReactDOM.renderToString(element);
+	var head              = Helmet.rewind();
 	var remaining_actions = _.chain(store)
 		.result('getState')
 		.result('server_actions')
@@ -12,10 +15,11 @@ module.exports = function serverRender(element, store, actions, done_server_acti
 		.value();
 
 	if (_.isEmpty(remaining_actions)) {
-		return Promise.resolve(markup);
+		return Promise.resolve({ markup: markup, head: head });
 	}
 
 	return Promise.all(remaining_actions.map(function(action) {
+		debug('execute server action ' + action.type, action.params);
 		return store.dispatch(actions[action.type](actions.params));
 	}))
 	.then(function() {
