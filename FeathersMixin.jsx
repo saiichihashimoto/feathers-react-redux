@@ -70,5 +70,6 @@ module.exports = {
 	},
 	componentWillUnmount: function() {
 		_.each(this.cleanups, _.partial);
+		this.cleanups = [];
 	}
 };

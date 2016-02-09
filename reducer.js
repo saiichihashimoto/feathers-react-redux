@@ -76,12 +76,17 @@ var resourcesReducer = function(resource) {
 					delete state[action.payload.id];
 				}
 				return state || {};
-			default:
+			case 'CREATED_' + RESOURCE:
+			case 'REMOVING_' + RESOURCE:
+			case 'UPDATED_' + RESOURCE:
+			case 'UPDATING_' + RESOURCE:
 				if (_.chain(action.payload).result('id').isUndefined().value()) {
 					return state || {};
 				}
 				state = _.clone(state);
 				state[action.payload.id] = singleItemReducer(state[action.payload.id], action);
+				return state || {};
+			default:
 				return state || {};
 		}
 	};
