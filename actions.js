@@ -47,7 +47,7 @@ module.exports = function(app, resource) {
 			debug('creating ' + resource, data, params);
 			dispatch(creatingResource());
 			return app.service('/api/' + resources).create(data, params, function(err, object) {
-				debug('created ' + resources, err, object);
+				debug('created ' + resource, err, object);
 				dispatch(createdResource(err ? new Error(err.message) : object));
 			});
 		};
