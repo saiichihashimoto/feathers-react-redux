@@ -5,17 +5,17 @@ Feathers React Redux
 
 Unofficial [Feathers](http://feathersjs.com/) bindings for React-Redux.
 
-## Overview
+# Overview
 
 [React-Redux](https://github.com/rackt/react-redux) is great. [Feathers](http://feathersjs.com/) is fantastic. feathers-react-redux aims to tie these two together.
 
-## Features
+# Features
 
 * Redux stores mirror feathers services through reducers.
 * Dispatched actions are consistently named and follow proper [Flux Standard Action conventions](https://github.com/acdlite/flux-standard-action).
 * React Components define what they need, whether it be an initial client side load, initial server side load, or keeping up to date with feathers events.
 
-## Installation
+# Installation
 
 ```
 npm install --save feathers-react-redux
@@ -23,22 +23,19 @@ npm install --save feathers-react-redux
 
 This assumes that you’re using [npm](http://npmjs.com/) package manager with a module bundler like [Webpack](http://webpack.github.io) or [Browserify](http://browserify.org/) to consume [CommonJS modules](http://webpack.github.io/docs/commonjs.html).
 
-## Usage
+# Usage
 
-### Basic Usage
+## API
 
-#### `reducer(resource)`
+### `<ServiceComponent>` TODO
 
-#### `actions(app, resource)`
+* `serviceName` TODO
+* `sliceName` TODO
 
-#### `FeathersMixin`
+### `serviceReducer(serviceName)` TODO
 
-##### `FeathersMixin.setFeathersApp(app)`
+### `actions(app, serviceName)` TODO
 
-##### `FeathersMixin.setFeathersActions(actions)`
+### `serverActionsReducer(state, action)` TODO
 
-##### `FeathersMixin.feathers(resource, options)`
-
-#### `serverActionsReducer(state, action)`
-
-#### `serverRender(element, store, actions, callback)`
+### `serverRender(element, store, actions, callback)` TODO
