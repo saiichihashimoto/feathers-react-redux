@@ -7,15 +7,13 @@ module.exports = function(resource) {
 	return function(state, action) {
 		switch (action.type) {
 			case 'LOAD_' + RESOURCES:
-				return {
-					data: _.chain(action.payload)
-						.indexBy('id')
-						.mapObject(function(obj) {
-							return { data: obj };
-						})
-						.defaults(_.result(state, 'data'))
-						.value()
-				};
+				return _.chain(action.payload)
+					.indexBy('id')
+					.mapObject(function(obj) {
+						return { data: obj };
+					})
+					.defaults(state)
+					.value();
 			default:
 				return state || {};
 		}

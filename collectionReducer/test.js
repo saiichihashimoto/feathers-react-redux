@@ -12,12 +12,10 @@ describe('collectionReducer', function() {
 	describe('on LOAD_<RESOURCES>', function() {
 		it('should populate state', function() {
 			var initialState = {
-				data: {
-					0: {
-						data: {
-							id:    0,
-							value: 'zero'
-						}
+				0: {
+					data: {
+						id:    0,
+						value: 'zero'
 					}
 				}
 			};
@@ -36,41 +34,34 @@ describe('collectionReducer', function() {
 			});
 
 			expect(state).to.not.equal(initialState);
-			expect(state)
-				.to.have.property('data')
-					.not.equal(initialState.data);
-			expect(state)
-				.to.have.property('data')
-					.deep.equal({
-						0: {
-							data: {
-								id:    0,
-								value: 'zero'
-							}
-						},
-						1: {
-							data: {
-								id:    1,
-								value: 'one'
-							}
-						},
-						2: {
-							data: {
-								id:    2,
-								value: 'two'
-							}
-						}
-					});
+			expect(state).to.deep.equal({
+				0: {
+					data: {
+						id:    0,
+						value: 'zero'
+					}
+				},
+				1: {
+					data: {
+						id:    1,
+						value: 'one'
+					}
+				},
+				2: {
+					data: {
+						id:    2,
+						value: 'two'
+					}
+				}
+			});
 		});
 
 		it('should overwrite a resources', function() {
 			var initialState = {
-				data: {
-					0: {
-						data: {
-							id:    0,
-							value: 'zero'
-						}
+				0: {
+					data: {
+						id:    0,
+						value: 'zero'
 					}
 				}
 			};
@@ -84,16 +75,14 @@ describe('collectionReducer', function() {
 				]
 			});
 
-			expect(state)
-				.to.have.property('data')
-					.deep.equal({
-						0: {
-							data: {
-								id:    0,
-								value: 'zero 2'
-							}
-						}
-					});
+			expect(state).to.deep.equal({
+				0: {
+					data: {
+						id:    0,
+						value: 'zero 2'
+					}
+				}
+			});
 		});
 	});
 });
