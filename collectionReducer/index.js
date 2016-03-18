@@ -9,13 +9,19 @@ module.exports = function(resource) {
 		switch (action.type) {
 			case 'LOADED_' + RESOURCES:
 				return _.chain(action.payload)
-					.indexBy('id')
-					.mapObject(function(obj) {
-						return { data: obj };
+					.filter(function(obj) {
+						if (!_.result(state, obj.id)) {
+							return true;
+						}
+						return state[obj.id].__v < obj.__v;
 					})
+					.indexBy('id')
 					.defaults(state)
 					.value();
 			case 'REMOVED_' + RESOURCE:
+				if (!_.result(state, action.payload.id) || state[action.payload.id].__v > action.payload.__v) {
+					return state || {};
+				}
 				return _.omit(state, action.payload.id);
 			default:
 				return state || {};

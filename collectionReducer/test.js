@@ -13,22 +13,16 @@ describe('collectionReducer', function() {
 		it('should populate state', function() {
 			var initialState = {
 				0: {
-					data: {
-						id:    0,
-						value: 'zero'
-					}
+					__v: 0,
+					id:  0
 				}
 			};
 			var state = collectionReducer('resource')(initialState, {
 				type:    'LOADED_RESOURCES',
 				payload: [
 					{
-						id:    1,
-						value: 'one'
-					},
-					{
-						id:    2,
-						value: 'two'
+						__v: 0,
+						id:  1
 					}
 				]
 			});
@@ -36,87 +30,125 @@ describe('collectionReducer', function() {
 			expect(state).to.not.equal(initialState);
 			expect(state).to.deep.equal({
 				0: {
-					data: {
-						id:    0,
-						value: 'zero'
-					}
+					__v: 0,
+					id:  0
 				},
 				1: {
-					data: {
-						id:    1,
-						value: 'one'
-					}
-				},
-				2: {
-					data: {
-						id:    2,
-						value: 'two'
-					}
+					__v: 0,
+					id:  1
 				}
 			});
 		});
 
-		it('should overwrite a resources', function() {
+		it('should overwrite resources that are older', function() {
 			var initialState = {
 				0: {
-					data: {
-						id:    0,
-						value: 'zero'
-					}
+					__v: 0,
+					id:  0
 				}
 			};
 			var state = collectionReducer('resource')(initialState, {
 				type:    'LOADED_RESOURCES',
 				payload: [
 					{
-						id:    0,
-						value: 'zero 2'
+						__v: 1,
+						id:  0
 					}
 				]
 			});
 
 			expect(state).to.deep.equal({
 				0: {
-					data: {
-						id:    0,
-						value: 'zero 2'
+					__v: 1,
+					id:  0
+				}
+			});
+		});
+
+		it('should not overwrite resources that are newer', function() {
+			var initialState = {
+				0: {
+					__v: 1,
+					id:  0
+				}
+			};
+			var state = collectionReducer('resource')(initialState, {
+				type:    'LOADED_RESOURCES',
+				payload: [
+					{
+						__v: 0,
+						id:  0
 					}
+				]
+			});
+
+			expect(state).to.deep.equal({
+				0: {
+					__v: 1,
+					id:  0
 				}
 			});
 		});
 	});
 
 	describe('on REMOVED_<RESOURCE>', function() {
-		it('should remove a resource', function() {
+		it('should remove a resource that is older', function() {
 			var initialState = {
 				0: {
-					data: {
-						id:    0,
-						value: 'zero'
-					}
-				},
-				1: {
-					data: {
-						id:    1,
-						value: 'one'
-					}
+					__v: 0,
+					id:  0
 				}
 			};
 			var state = collectionReducer('resource')(initialState, {
 				type:    'REMOVED_RESOURCE',
 				payload: {
-					id:    1,
-					value: 'one'
+					__v: 1,
+					id:  0
 				}
 			});
 
 			expect(state).to.not.equal(initialState);
+			expect(state).to.deep.equal({ });
+		});
+
+		it('should remove a resource that is the same age', function() {
+			var initialState = {
+				0: {
+					__v: 0,
+					id:  0
+				}
+			};
+			var state = collectionReducer('resource')(initialState, {
+				type:    'REMOVED_RESOURCE',
+				payload: {
+					__v: 0,
+					id:  0
+				}
+			});
+
+			expect(state).to.not.equal(initialState);
+			expect(state).to.deep.equal({ });
+		});
+
+		it('should not remove a resource that is newer', function() {
+			var initialState = {
+				0: {
+					__v: 1,
+					id:  0
+				}
+			};
+			var state = collectionReducer('resource')(initialState, {
+				type:    'REMOVED_RESOURCE',
+				payload: {
+					__v: 0,
+					id:  0
+				}
+			});
+
 			expect(state).to.deep.equal({
 				0: {
-					data: {
-						id:    0,
-						value: 'zero'
-					}
+					__v: 1,
+					id:  0
 				}
 			});
 		});
