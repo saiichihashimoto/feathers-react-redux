@@ -19,6 +19,7 @@ module.exports = function(resource) {
 					.defaults(state)
 					.value();
 			case 'LOADED_' + RESOURCE:
+			case 'UPDATED_' + RESOURCE:
 				if (_.result(state, action.payload.id) && state[action.payload.id].__v > action.payload.__v) {
 					return state || {};
 				}
