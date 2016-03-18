@@ -57,9 +57,36 @@ describe('collectionReducer', function() {
 				]
 			});
 
+			expect(state).to.not.equal(initialState);
 			expect(state).to.deep.equal({
 				0: {
 					__v: 1,
+					id:  0
+				}
+			});
+		});
+
+		it('should overwrite resources that are the same age', function() {
+			var initialState = {
+				0: {
+					__v: 0,
+					id:  0
+				}
+			};
+			var state = collectionReducer('resource')(initialState, {
+				type:    'LOADED_RESOURCES',
+				payload: [
+					{
+						__v: 0,
+						id:  0
+					}
+				]
+			});
+
+			expect(state).to.not.equal(initialState);
+			expect(state).to.deep.equal({
+				0: {
+					__v: 0,
 					id:  0
 				}
 			});
