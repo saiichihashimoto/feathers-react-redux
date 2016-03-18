@@ -32,7 +32,9 @@ This assumes that you’re using [npm](http://npmjs.com/) package manager with a
 * `serviceName` TODO
 * `sliceName` TODO
 
-### `serviceReducer(serviceName)` TODO
+### `collectionReducer(resource)`
+
+Returns a reducer that reduces to an object that is keyed by the objects' ```id```'s. Uses each object's ```__v``` to know if actions should replace the current object's values.
 
 ### `actions(app, serviceName)` TODO
 
