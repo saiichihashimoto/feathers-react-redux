@@ -14,9 +14,11 @@
   "homepage": "https://github.com/saiichihashimoto/feathers-react-redux#readme",
   "main": "index.js",
   "scripts": {
+    "test": "npm run mocha && npm run eslint",
     "fix": "npm run eslint-fix",
+    "eslint": "eslint . --ignore-path .gitignore --ext .js,.jsx",
     "eslint-fix": "( git diff --staged --name-only | grep \".jsx\\?$\" | xargs eslint --fix ) && ( git diff --staged --name-only | grep \".jsx\\?$\" | xargs git add )",
-    "test": "eslint . --ignore-path .gitignore --ext .js,.jsx"
+    "mocha": "mocha $(find . -name 'test.js' ! -ipath '*node_modules*')"
   },
   "pre-commit": [
     "fix",
@@ -36,6 +38,7 @@
     "eslint": "^1.10.3",
     "eslint-config-xo": "^0.9.1",
     "eslint-plugin-react": "^3.15.0",
+    "mocha": "^2.4.5",
     "pre-commit": "^1.1.2"
   }
 }
