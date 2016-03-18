@@ -40,7 +40,7 @@ describe('collectionReducer', function() {
 			});
 		});
 
-		it('should overwrite resources that are older', function() {
+		it('should replace resources that are older', function() {
 			var initialState = {
 				0: {
 					__v: 0,
@@ -66,7 +66,7 @@ describe('collectionReducer', function() {
 			});
 		});
 
-		it('should overwrite resources that are the same age', function() {
+		it('should replace resources that are the same age', function() {
 			var initialState = {
 				0: {
 					__v: 0,
@@ -92,7 +92,7 @@ describe('collectionReducer', function() {
 			});
 		});
 
-		it('should not overwrite resources that are newer', function() {
+		it('should not replace resources that are newer', function() {
 			var initialState = {
 				0: {
 					__v: 1,
@@ -107,6 +107,107 @@ describe('collectionReducer', function() {
 						id:  0
 					}
 				]
+			});
+
+			expect(state).to.deep.equal({
+				0: {
+					__v: 1,
+					id:  0
+				}
+			});
+		});
+	});
+
+	describe('on LOADED_<RESOURCE>', function() {
+		it('should populate state', function() {
+			var initialState = {
+				0: {
+					__v: 0,
+					id:  0
+				}
+			};
+			var state = collectionReducer('resource')(initialState, {
+				type:    'LOADED_RESOURCE',
+				payload: {
+					__v: 0,
+					id:  1
+				}
+			});
+
+			expect(state).to.not.equal(initialState);
+			expect(state).to.deep.equal({
+				0: {
+					__v: 0,
+					id:  0
+				},
+				1: {
+					__v: 0,
+					id:  1
+				}
+			});
+		});
+
+		it('should replace a resource that is older', function() {
+			var initialState = {
+				0: {
+					__v: 0,
+					id:  0
+				}
+			};
+			var state = collectionReducer('resource')(initialState, {
+				type:    'LOADED_RESOURCE',
+				payload: {
+					__v: 1,
+					id:  0
+				}
+			});
+
+			expect(state).to.not.equal(initialState);
+			expect(state).to.deep.equal({
+				0: {
+					__v: 1,
+					id:  0
+				}
+			});
+		});
+
+		it('should replace a resource that is the same age', function() {
+			var initialState = {
+				0: {
+					__v: 0,
+					id:  0
+				}
+			};
+			var state = collectionReducer('resource')(initialState, {
+				type:    'LOADED_RESOURCE',
+				payload: {
+					__v: 0,
+					id:  0
+				}
+			});
+
+			expect(state).to.not.equal(initialState);
+			expect(state).to.deep.equal({
+				0: {
+					__v: 0,
+					id:  0
+				}
+			});
+		});
+
+		it('should not replace a resource that is newer', function() {
+			var initialState = {
+				0: {
+					__v: 1,
+					id:  0
+				}
+			};
+			var state = collectionReducer('resource')(initialState, {
+				type:    'LOADED_RESOURCE',
+				payload: {
+					__v: 0,
+					id:  0
+				}
 			});
 
 			expect(state).to.deep.equal({

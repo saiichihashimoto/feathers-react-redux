@@ -13,11 +13,18 @@ module.exports = function(resource) {
 						if (!_.result(state, obj.id)) {
 							return true;
 						}
-						return state[obj.id].__v < obj.__v;
+						return state[obj.id].__v <= obj.__v;
 					})
 					.indexBy('id')
 					.defaults(state)
 					.value();
+			case 'LOADED_' + RESOURCE:
+				if (_.result(state, action.payload.id) && state[action.payload.id].__v > action.payload.__v) {
+					return state || {};
+				}
+				state = _.clone(state);
+				state[action.payload.id] = action.payload;
+				return state;
 			case 'REMOVED_' + RESOURCE:
 				if (!_.result(state, action.payload.id) || state[action.payload.id].__v > action.payload.__v) {
 					return state || {};
