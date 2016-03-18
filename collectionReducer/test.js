@@ -9,7 +9,7 @@ describe('collectionReducer', function() {
 		collectionReducer = require('.');
 	});
 
-	describe('on LOAD_<RESOURCES>', function() {
+	describe('on LOADED_<RESOURCES>', function() {
 		it('should populate state', function() {
 			var initialState = {
 				0: {
@@ -20,7 +20,7 @@ describe('collectionReducer', function() {
 				}
 			};
 			var state = collectionReducer('resource')(initialState, {
-				type:    'LOAD_RESOURCES',
+				type:    'LOADED_RESOURCES',
 				payload: [
 					{
 						id:    1,
@@ -66,7 +66,7 @@ describe('collectionReducer', function() {
 				}
 			};
 			var state = collectionReducer('resource')(initialState, {
-				type:    'LOAD_RESOURCES',
+				type:    'LOADED_RESOURCES',
 				payload: [
 					{
 						id:    0,
@@ -80,6 +80,42 @@ describe('collectionReducer', function() {
 					data: {
 						id:    0,
 						value: 'zero 2'
+					}
+				}
+			});
+		});
+	});
+
+	describe('on REMOVED_<RESOURCE>', function() {
+		it('should remove a resource', function() {
+			var initialState = {
+				0: {
+					data: {
+						id:    0,
+						value: 'zero'
+					}
+				},
+				1: {
+					data: {
+						id:    1,
+						value: 'one'
+					}
+				}
+			};
+			var state = collectionReducer('resource')(initialState, {
+				type:    'REMOVED_RESOURCE',
+				payload: {
+					id:    1,
+					value: 'one'
+				}
+			});
+
+			expect(state).to.not.equal(initialState);
+			expect(state).to.deep.equal({
+				0: {
+					data: {
+						id:    0,
+						value: 'zero'
 					}
 				}
 			});
