@@ -1,9 +1,6 @@
 {
-	"extends": "xo",
+	"extends": ["xo", "plugin:react/recommended"],
 	"plugins": ["react"],
-	"env": {
-		"browser": true
-	},
 	"ecmaFeatures": {
 		"jsx": true
 	},
@@ -18,7 +15,7 @@
 		"no-mixed-spaces-and-tabs": [2, "smart-tabs"],
 		"no-multi-spaces": [2, { "exceptions": { "VariableDeclarator": true } }],
 		"object-curly-spacing": [2, "always"],
-		"react/jsx-uses-react": 2,
-		"space-before-function-paren": [2, "never"]
+		"space-before-function-paren": [2, "never"],
+		"yoda": [2, "never", { "exceptRange": true }]
 	}
 }

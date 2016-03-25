@@ -15,9 +15,9 @@
   "main": "index.js",
   "scripts": {
     "test": "npm run mocha && npm run eslint",
-    "fix": "npm run eslint-fix",
+    "fix": "npm run eslint:fix",
     "eslint": "eslint . --ignore-path .gitignore --ext .js,.jsx",
-    "eslint-fix": "( git diff --staged --name-only | grep \".jsx\\?$\" | xargs eslint --fix ) && ( git diff --staged --name-only | grep \".jsx\\?$\" | xargs git add )",
+    "eslint:fix": "( git diff --staged --name-only | grep \".jsx\\?$\" | xargs eslint --fix ) && ( git diff --staged --name-only | grep \".jsx\\?$\" | xargs git add )",
     "mocha": "mocha $(find . -name 'test.js' ! -ipath '*node_modules*')"
   },
   "pre-commit": [
@@ -26,6 +26,7 @@
   ],
   "dependencies": {
     "debug": "^2.2.0",
+    "feathers-errors": "^2.0.2",
     "pluralize": "^1.2.1",
     "react": "^0.14.7",
     "react-dom": "^0.14.6",
@@ -36,9 +37,9 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
-    "eslint": "^1.10.3",
-    "eslint-config-xo": "^0.9.1",
-    "eslint-plugin-react": "^3.15.0",
+    "eslint": "^2.5.0",
+    "eslint-config-xo": "^0.12.0",
+    "eslint-plugin-react": "^4.2.3",
     "mocha": "^2.4.5",
     "pre-commit": "^1.1.2"
   }
