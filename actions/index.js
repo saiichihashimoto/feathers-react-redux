@@ -4,6 +4,20 @@ var createAction = require('redux-actions').createAction;
 var errors       = require('feathers-errors');
 var pluralize    = require('pluralize');
 
+_.mixin({
+	waitAndReject: function(func) {
+		return function(err) {
+			var result = func(err);
+			if (!result.then) {
+				return Promise.reject(err);
+			}
+			return result.then(function() {
+				return Promise.reject(err);
+			});
+		};
+	}
+});
+
 function errorTransform(err) {
 	return ((err instanceof Error) || !errors[err.name]) ? err : new errors[err.name](err.message, err.data);
 }
