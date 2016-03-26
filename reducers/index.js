@@ -15,7 +15,9 @@ module.exports = {
 		var RESOURCE  = resource.toUpperCase();
 		var RESOURCES = resources.toUpperCase();
 
-		var reducers = {};
+		var reducers = {
+			LOGOUT: _.constant(Immutable.List())
+		};
 
 		reducers['GOT_' + RESOURCES] = function(state, action) {
 			return action.error ? state : Immutable.fromJS(action.payload);
