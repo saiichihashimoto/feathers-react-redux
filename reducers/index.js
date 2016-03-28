@@ -1,7 +1,7 @@
 var _             = require('underscore');
 var handleActions = require('redux-actions').handleActions;
 var pluralize     = require('pluralize');
-var Immutable     = require('Immutable');
+var Immutable     = require('immutable');
 
 module.exports = {
 	reducerForFeathersLogin: function() {
