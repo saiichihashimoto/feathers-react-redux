@@ -45,7 +45,6 @@ module.exports = {
 			},
 			logout: function() {
 				return function(dispatch) {
-					document.cookie = 'feathers-jwt=;'; // FIXME Why do I have to do this?
 					var dispatchSetLogout = _.compose(dispatch, actions.setLogout);
 					return app.logout().then(
 						dispatchSetLogout,
